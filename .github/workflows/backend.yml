@@ -27,12 +27,18 @@ jobs:
       - name: Run tests
         run: pytest --cov=. --cov-report=xml
 
-      # ✅ ADD SONARCLOUD HERE
+      
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      - name: Snyk Test
+        uses: snyk/actions/python@master
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        with:
+          command: test
 
       - name: Docker login
         uses: docker/login-action@v3
