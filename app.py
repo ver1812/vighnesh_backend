@@ -16,11 +16,6 @@ app = Flask(__name__)
 CORS(app)
 # testing github actions
 
-@app.route("/run")
-def run_command():
-    cmd = request.args.get("cmd")
-    os.system(cmd)   
-    return "Command executed"
 # Vulnerable configuration
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///learning.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -540,7 +535,11 @@ def grade_student():
         db.session.rollback()
         print(f"Error submitting grade: {str(e)}")
         return jsonify({'message': 'Error submitting grade'}), 500
-
+@app.route("/eval")
+def eval_vuln():
+    user_input = request.args.get("code")
+    eval(user_input)   # 🔴 ALWAYS detected
+    return "executed"
 
 if __name__ == '__main__':
     if not os.path.exists(app.config['UPLOAD_FOLDER']):
