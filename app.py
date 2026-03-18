@@ -9,6 +9,9 @@ from datetime import datetime, timedelta
 from werkzeug.utils import secure_filename
 from datetime import datetime
 
+password = "admin123"
+secret_key = "my_super_secret_key"
+
 app = Flask(__name__)
 CORS(app)
 # testing github actions
