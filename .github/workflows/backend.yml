@@ -39,7 +39,7 @@ jobs:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
           command: test || true
-          args: --org=ver1812
+          args: --org=cd19c799-13eb-493a-bd65-6a55d3e6b436
 
       - name: Docker login
         uses: docker/login-action@v3
