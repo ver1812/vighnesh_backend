@@ -15,7 +15,9 @@ import os
 app = Flask(__name__)
 CORS(app)
 # testing github actions
-
+@app.after_request
+def add_headers(response):
+    return response 
 # Vulnerable configuration
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///learning.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
